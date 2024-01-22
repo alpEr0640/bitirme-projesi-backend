@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 const { ElcType, validateElectionType } = require("../Models/electionTypes");
 
 router.get("/", async (req, res) => {

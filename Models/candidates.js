@@ -1,21 +1,19 @@
 const mongoose = require("mongoose");
 const joi = require("joi");
-const {Schema} = require("mongoose")
+const { Schema } = require("mongoose");
+const { Register, validateRegister } = require("../Models/registers");
 
 const candidateSchema = mongoose.Schema({
-    Tc:String,
-    name: String,
-    surname: String,
+    candidateId: {type: Schema.Types.ObjectId, ref:"register"}
 });
+
+
 
 function validateCandidate(candidate) {
     const schema = new joi.object({
-        Tc: joi.string().required(),
-        name: joi.string().required(),
-        surname: joi.string().required(),
-        elections: joi.string().required(),
+      candidateId: joi.string().required(),
     });
-    return schema.validate(candidate);
+  return schema.validate(candidate);
 }
 
 const Candidate = mongoose.model("candidate", candidateSchema);

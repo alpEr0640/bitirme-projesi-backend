@@ -4,7 +4,8 @@ const joi = require("joi");
 const registerSchema = mongoose.Schema({
     name: String,
     surname: String,
-    kimlikNo: Number,
+    kimlikNo: String,
+    password: String,
     dogumTrh: Date,
     telNo: Number,
 });
@@ -14,7 +15,8 @@ function validateRegister(register) {
         name: joi.string().required(),
         surname: joi.string().required(),
         dogumTrh:joi.required(),
-        kimlikNo: joi.number().required(),
+        kimlikNo: joi.string().required(),
+        password: joi.string().min(8),
         telNo: joi.number().required(),
     });
     
@@ -22,4 +24,4 @@ function validateRegister(register) {
 }
 
 const Register = mongoose.model("register", registerSchema);
-module.exports = { Register, validateRegister };
+module.exports = { Register,registerSchema, validateRegister };

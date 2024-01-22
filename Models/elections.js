@@ -1,20 +1,28 @@
 const mongoose = require("mongoose");
 const joi = require("joi");
+const fs = require("fs");
 const { Schema } = require("mongoose");
-const { ElcType, validateElectionType } = require("../Models/electionTypes");
-const { Candidate, validateCandidate } = require("../Models/candidates")
+const { ElcType } = require("../Models/electionTypes");
+const { Candidate } = require("../Models/candidates");
+const {vtr} = require("../Models/voterList")
 
 const electionSchema = mongoose.Schema({
   initDate: Date,
+  electionTitle: String,
+  electionExplanation: String,
   electionType: { type: Schema.Types.ObjectId, ref: "ElcType" },
-  candidateId: [{ type: Schema.Types.ObjectId, ref: "candidate" }],
+  candidates: [{ type: Schema.Types.ObjectId, ref: "candidate" }],
+  voter: [{ type: Schema.Types.ObjectId, ref: "vtr" }],
 });
 
 function validateElection(Election) {
   const schema = new joi.object({
-    initDate: joi.Date().required(),
+    initDate: joi.date().required(),
+    electionTitle: joi.string().max(50).required(),
+    electionExplanation: joi.string().required(),
     electionType: joi.string().required(),
-    candidateId:joi.array().required(),
+    candidates: joi.array().required(),
+    voter: joi.array(),
   });
   return schema.validate(Election);
 }
