@@ -10,7 +10,6 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
     const elcTyp = new ElcType({
         electionType: req.body.electionType,
-        asd: req.body.asd
     });
     try {
         const result = await elcTyp.save();

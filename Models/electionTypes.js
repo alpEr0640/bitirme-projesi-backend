@@ -3,7 +3,6 @@ const joi = require("joi");
 
 const electionTypeSchema =new mongoose.Schema({
     electionType: String,
-    asd:String,
 });
 
 function validateElectionType(ElectionType) {
