@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const { ancmt, validateAnnouncement } = require("../Models/Announcements");
+const isAdmin = require("../middleware/isAdmin");
+
 
 router.get("/", async (req, res) => {
   const announcement = await ancmt.find();
@@ -16,7 +18,7 @@ router.get("/:id", async (req, res) => {
   res.send(announcemet);
 });
 
-router.post("/", async (req, res) => {
+router.post("/",isAdmin, async (req, res) => {
   const result = validateAnnouncement(req.body);
   if (result.error) {
     return res.status(404).send(result.error.details[0].message);

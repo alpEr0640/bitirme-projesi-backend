@@ -5,8 +5,6 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const home = require("./Routes/Home");
 const Candidates = require("./Routes/candidates");
-const Registers = require("./Routes/register");
-const Login = require("./Routes/Login");
 const elections = require("./Routes/Elections");
 const electionType = require("./Routes/electionTypes");
 const signup = require("./Routes/signup");
@@ -24,19 +22,18 @@ app.use(
 
 app.use("/", home);
 app.use("/api/candidate", Candidates);
-app.use("/api/login", Login);
-app.use("/api/registers", Registers);
 app.use("/api/elections", elections);
-app.use("/api/election-types", electionType);
+app.use("/api/electiontypes", electionType);
 app.use("/api/signup", signup);
 app.use("/api/voterlist", voterList);
 app.use("/api/directory", directory);
 app.use("/api/announcement", announcement);
 
+const link =
+  "mongodb+srv://alpersonat:alper12389@bitirmeprojesi.i9vz8sb.mongodb.net/?retryWrites=true&w=majority";
+const locallink = "mongodb://localhost:27017/Elections";
 mongoose
-  .connect(
-    "mongodb+srv://alpersonat:alper12389@bitirmeprojesi.i9vz8sb.mongodb.net/?retryWrites=true&w=majority"
-  )
+  .connect(`${locallink}`)
   .then(() => {
     console.log("mongodb bağlantısı kuruldu");
   })
