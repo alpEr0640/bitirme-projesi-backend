@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
   const Rgs = await Register.find();
   res.send(Rgs);
 });
-router.get("/:id", async (req, res) => {
+router.get("/:id ", async (req, res) => {
   const Rgs = await Register.findById({ _id: req.params.id });
   if (!Rgs) {
     return res.status(404).send("aradığınız kullanıcı Bulunamadı");

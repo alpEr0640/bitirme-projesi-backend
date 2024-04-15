@@ -50,4 +50,4 @@ registerSchema.methods.createAuthToken = function () {
 };
 
 const Register = mongoose.model("register", registerSchema);
-module.exports = { Register, validateRegister, validateLogin };
+module.exports = { Register, validateRegister, validateLogin, };

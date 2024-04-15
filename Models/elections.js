@@ -4,10 +4,12 @@ const fs = require("fs");
 const { Schema } = require("mongoose");
 const { ElcType } = require("../Models/electionTypes");
 const { Candidate } = require("../Models/candidates");
-const {vtr} = require("../Models/voterList")
+const {vtr} = require("../Models/voterList");
+const { type } = require("os");
 
 const electionSchema = mongoose.Schema({
   initDate: Date,
+  endDate: Date,
   electionTitle: String,
   electionExplanation: String,
   electionType: { type: Schema.Types.ObjectId, ref: "ElcType" },

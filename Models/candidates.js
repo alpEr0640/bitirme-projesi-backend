@@ -4,7 +4,11 @@ const { Schema } = require("mongoose");
 const { Register, validateRegister } = require("../Models/registers");
 
 const candidateSchema = mongoose.Schema({
-    candidateId: {type: Schema.Types.ObjectId, ref:"register"}
+  candidateId: { type: Schema.Types.ObjectId, ref: "register" },
+  vote: {
+    type: Number,
+    default: "0"
+  }
 });
 
 

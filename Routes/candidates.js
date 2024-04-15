@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { Candidate, validateCandidate } = require("../Models/candidates");
-
 const { Register } = require("../Models/registers");
+const auth = require("../middleware/auth");
 
 router.get("/", async (req, res) => {
   const result = await Candidate.find().populate("candidateId");
@@ -50,6 +50,17 @@ router.put("/:id", async (req, res) => {
   const updatedCandidate = await candidate.save();
   res.send(updatedCandidate);
 });
+router.put("/vote/:id",  async (req, res) => {
+  try {
+    const candidate = await Candidate.findById(req.params.id);
+    candidate.vote += 1;
+    const updatedCandidate = await candidate.save();
+    res.send(updatedCandidate);
+  } catch (error) {
+    console.error("Hata:", error);
+    res.status(500).send("Sunucu hatası");
+  }
+})
 
 router.delete("/:id", async (req, res) => {
   const result = await Candidate.deleteOne({ _id: req.params.id });

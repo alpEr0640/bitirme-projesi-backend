@@ -10,6 +10,11 @@ const {
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const isAdmin = require("../middleware/isAdmin");
+router.get("/", async (req, res,) => {
+  const Rgs = await Register.find();
+  res.send(Rgs);
+})
+
 router.post("/create", async (req, res, next) => {
   const { error } = validateRegister(req.body);
 
@@ -57,6 +62,9 @@ function calculateAge(birthDate) {
   return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
 
+//-------------------------------------Signin----------------------------------------------------
+  
+
 router.post("/auth", async (req, res) => {
   const { error } = validateLogin(req.body);
 
@@ -73,10 +81,12 @@ router.post("/auth", async (req, res) => {
   if (!isSuccess) {
     return res.status(400).send("hatalı email ya da parola");
   }
+  else {
+  }
 
   const token = register.createAuthToken();
 
-  res.send(register);
+  res.send(token);
 });
 
 module.exports = router;

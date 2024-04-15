@@ -4,8 +4,10 @@ const router = express.Router();
 const { Elc, validateElection } = require("../Models/elections");
 const { Candidate } = require("../Models/candidates");
 const { vtr } = require("../Models/voterList");
+const checkInitDate = require("../middleware/checkInitDate");
+const checkEndDate = require("../middleware/checkEndDate")
 
-router.get("/", async (req, res) => {
+router.get("/",[checkEndDate,checkInitDate], async (req, res) => {
   const election = await Elc.find()
     .populate({
       path: "candidates",
@@ -14,7 +16,8 @@ router.get("/", async (req, res) => {
         model: "register",
       },
     })
-    .populate("electionType").populate("voter");
+    .populate("electionType")
+    .populate("voter");
   res.send(election);
 });
 
@@ -45,7 +48,7 @@ router.post("/", async (req, res) => {
     electionExplanation: req.body.electionExplanation,
     electionType: req.body.electionType,
     candidates: req.body.candidates,
-    voter:req.body.voter,
+    voter: req.body.voter,
   });
   try {
     const result = await election.save();
