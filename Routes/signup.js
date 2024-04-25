@@ -15,6 +15,12 @@ router.get("/", async (req, res,) => {
   res.send(Rgs);
 })
 
+router.get("/:id", async (req, res) => {
+  const user = await Register.findById({ _id: req.params.id });
+  res.send(user);
+})
+
+
 router.post("/create", async (req, res, next) => {
   const { error } = validateRegister(req.body);
 
@@ -62,7 +68,7 @@ function calculateAge(birthDate) {
   return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
 
-//-------------------------------------Signin----------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   
 
 router.post("/auth", async (req, res) => {
@@ -74,19 +80,21 @@ router.post("/auth", async (req, res) => {
 
   let register = await Register.findOne({ kimlikNo: req.body.kimlikNo });
   if (!register) {
-    return res.status(400).send("hatalı email ya da parola");
+    return res.status(400).send("hatalı email ya da parolas");
   }
 
   const isSuccess = await bcrypt.compare(req.body.password, register.password);
   if (!isSuccess) {
-    return res.status(400).send("hatalı email ya da parola");
+    return res.status(400).send("hatalı email ya da parolalar");
   }
   else {
   }
 
-  const token = register.createAuthToken();
-
-  res.send(token);
+  /* const token = register.createAuthToken();
+*/
+  res.json({
+    token: register.createAuthToken()
+  })
 });
 
 module.exports = router;

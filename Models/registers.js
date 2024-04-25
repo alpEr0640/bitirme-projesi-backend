@@ -40,9 +40,9 @@ registerSchema.methods.createAuthToken = function () {
   const decodedToken = jwt.sign(
     {
       _id: this._id,
-      _isAdmin: this.isAdmin,
       _kimlikNo: this.kimlikNo,
       _password: this.password,
+      
     },
     "jwtPrivateKey"
   );

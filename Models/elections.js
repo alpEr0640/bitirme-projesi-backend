@@ -15,16 +15,19 @@ const electionSchema = mongoose.Schema({
   electionType: { type: Schema.Types.ObjectId, ref: "ElcType" },
   candidates: [{ type: Schema.Types.ObjectId, ref: "candidate" }],
   voter: [{ type: Schema.Types.ObjectId, ref: "vtr" }],
+  winCondition: String
 });
 
 function validateElection(Election) {
   const schema = new joi.object({
     initDate: joi.date().required(),
+    endDate: joi.date().required(),
     electionTitle: joi.string().max(50).required(),
     electionExplanation: joi.string().required(),
     electionType: joi.string().required(),
     candidates: joi.array().required(),
     voter: joi.array(),
+    winCondition:joi.string().required(),
   });
   return schema.validate(Election);
 }

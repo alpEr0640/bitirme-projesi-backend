@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Register, validateRegister } = require("../Models/registers");
+const isAdmin = require("../middleware/isAdmin");
 
 router.get("/", async (req, res) => {
   const Rgs = await Register.find();
@@ -26,6 +27,7 @@ router.post("/", async (req, res) => {
     password: req.body.password,
     dogumTrh: req.body.dogumTrh,
     telNo: req.body.telNo,
+    isAdmin:req.body.isAdmin,
   });
   try {
     const result = await Rgs.save();

@@ -5,9 +5,9 @@ const { Elc, validateElection } = require("../Models/elections");
 const { Candidate } = require("../Models/candidates");
 const { vtr } = require("../Models/voterList");
 const checkInitDate = require("../middleware/checkInitDate");
-const checkEndDate = require("../middleware/checkEndDate")
+const checkEndDate = require("../middleware/checkEndDate");
 
-router.get("/",[checkEndDate,checkInitDate], async (req, res) => {
+router.get("/",  async (req, res) => {
   const election = await Elc.find()
     .populate({
       path: "candidates",
@@ -18,8 +18,8 @@ router.get("/",[checkEndDate,checkInitDate], async (req, res) => {
     })
     .populate("electionType")
     .populate("voter");
-  res.send(election);
-});
+    res.send(election);
+  });
 
 router.get("/:id", async (req, res) => {
   const election = await Elc.findById({ _id: req.params.id })
@@ -44,11 +44,13 @@ router.post("/", async (req, res) => {
   }
   const election = new Elc({
     initDate: req.body.initDate,
+    endDate: req.body.endDate,
     electionTitle: req.body.electionTitle,
     electionExplanation: req.body.electionExplanation,
     electionType: req.body.electionType,
     candidates: req.body.candidates,
     voter: req.body.voter,
+    winCondition: req.body.winCondition
   });
   try {
     const result = await election.save();
@@ -69,7 +71,7 @@ router.put("/:id", async (req, res) => {
   res.send(updatedElection);
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => { 
   const result = await Elc.deleteOne({ _id: req.params.id });
   res.send(result);
 });

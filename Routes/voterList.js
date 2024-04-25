@@ -16,8 +16,6 @@ router.post("/", async (req, res) => {
     let cityData = fs.readFileSync(fileName);
     let cities = JSON.parse(cityData);
 
-    
-
     // MongoDB koleksiyonuna veriyi ekle
     await vtr.create(cities);
 
@@ -31,6 +29,6 @@ router.post("/", async (req, res) => {
 router.delete("/", async (req, res) => {
   const result = await vtr.deleteMany();
   res.send(result);
-})
+});
 
 module.exports = router;

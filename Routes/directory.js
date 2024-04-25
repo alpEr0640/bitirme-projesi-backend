@@ -10,7 +10,7 @@ router.get("/",  async (req, res) => {
   res.send(picture);
 });
 
-router.post("/", [auth, isAdmin], async (req, res) => {
+router.post("/",  async (req, res) => {
   const result = validateDirectory(req.body);
   if (result.error) {
     return res.status(200).send(result.error.details[0].message);

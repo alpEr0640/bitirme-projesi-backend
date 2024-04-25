@@ -18,7 +18,7 @@ router.get("/:id", async (req, res) => {
   res.send(announcemet);
 });
 
-router.post("/",isAdmin, async (req, res) => {
+router.post("/", async (req, res) => {
   const result = validateAnnouncement(req.body);
   if (result.error) {
     return res.status(404).send(result.error.details[0].message);
@@ -47,4 +47,8 @@ router.delete("/:id", async (req, res) => {
     res.send(result)
 })
 
+router.delete("/", async (req, res) => {
+  const result = await ancmt.deleteMany();
+  res.send(result);
+});
 module.exports = router;
