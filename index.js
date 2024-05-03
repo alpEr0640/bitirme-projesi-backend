@@ -33,7 +33,7 @@ const link =
   "mongodb+srv://alpersonat:alper12389@bitirmeprojesi.i9vz8sb.mongodb.net/?retryWrites=true&w=majority";
 const locallink = "mongodb://localhost:27017/Elections";
 mongoose
-  .connect(`${locallink}`)
+  .connect(`${link}`)
   .then(() => {
     console.log("mongodb bağlantısı kuruldu");
   })

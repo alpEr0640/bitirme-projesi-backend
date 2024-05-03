@@ -63,6 +63,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const election = await Elc.findById({ _id: req.params.id });
   (election.initDate = req.body.initDate),
+    ( election.endDate = req.body.endDate),
     (election.electionTitle = req.body.electionTitle),
     (election.electionExplanation = req.body.electionExplanation),
     (election.electionType = req.body.electionType),

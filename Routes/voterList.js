@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const fs = require("fs");
 const { vtr, validateVoterList } = require("../Models/voterList");
+const path = require("path");
 
 router.get("/", async (req, res) => {
   const voter = await vtr.find();
@@ -11,12 +12,12 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    const filePaths = req.body.filePaths;
     const fileName = req.body.fileName;
-    // JSON dosyasını oku
-    let cityData = fs.readFileSync(fileName);
+     const filePath = path.join(filePaths,fileName);
+    let cityData = fs.readFileSync(filePath);
     let cities = JSON.parse(cityData);
 
-    // MongoDB koleksiyonuna veriyi ekle
     await vtr.create(cities);
 
     console.log("Data successfully imported");
@@ -26,8 +27,8 @@ router.post("/", async (req, res) => {
     res.status(404).send("Internal Server Error");
   }
 });
-router.delete("/", async (req, res) => {
-  const result = await vtr.deleteMany();
+router.delete("/:id", async (req, res) => {
+  const result = await vtr.deleteOne({ _id: req.params.id });
   res.send(result);
 });
 

@@ -33,6 +33,7 @@ router.get("/:kimlikNo", async (req, res) => {
 router.post("/", async (req, res) => {
   const Cndt = new Candidate({
     candidateId: req.body.candidateId,
+    aboutCandidate: req.body.aboutCandidate,
   });
   try {
     const result = await Cndt.save();

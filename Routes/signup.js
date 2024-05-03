@@ -15,10 +15,13 @@ router.get("/", async (req, res,) => {
   res.send(Rgs);
 })
 
-router.get("/:id", async (req, res) => {
-  const user = await Register.findById({ _id: req.params.id });
+router.get("/:kimlikNo", async (req, res) => {
+  const user = await Register.findOne({ kimlikNo: req.params.kimlikNo });
+  if (!user) {
+    return res.status(404).send("aradığınız kullanıcı Bulunamadı");
+  }
   res.send(user);
-})
+});
 
 
 router.post("/create", async (req, res, next) => {

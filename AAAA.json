@@ -14,5 +14,9 @@
   {
     "kimlikNo": 12345678907,
     "isVoted": false
+  },
+  {
+    "kimlikNo":99988877724,
+    "isVoted": false
   }
-]
+] 

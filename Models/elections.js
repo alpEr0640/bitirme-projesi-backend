@@ -25,9 +25,9 @@ function validateElection(Election) {
     electionTitle: joi.string().max(50).required(),
     electionExplanation: joi.string().required(),
     electionType: joi.string().required(),
-    candidates: joi.array().required(),
+    /* candidates: joi.array().required(),
     voter: joi.array(),
-    winCondition:joi.string().required(),
+    winCondition:joi.string().required(), */
   });
   return schema.validate(Election);
 }
