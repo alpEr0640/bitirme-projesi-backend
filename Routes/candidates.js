@@ -3,6 +3,8 @@ const router = express.Router();
 const { Candidate, validateCandidate } = require("../Models/candidates");
 const { Register } = require("../Models/registers");
 const auth = require("../middleware/auth");
+const checkEndDate = require("../middleware/checkEndDate");
+const checkInitDate = require("../middleware/checkInitDate");
 
 router.get("/", async (req, res) => {
   const result = await Candidate.find().populate("candidateId");
@@ -34,6 +36,7 @@ router.post("/", async (req, res) => {
   const Cndt = new Candidate({
     candidateId: req.body.candidateId,
     aboutCandidate: req.body.aboutCandidate,
+    candidateColor: req.body.candidateColor
   });
   try {
     const result = await Cndt.save();
@@ -51,7 +54,7 @@ router.put("/:id", async (req, res) => {
   const updatedCandidate = await candidate.save();
   res.send(updatedCandidate);
 });
-router.put("/vote/:id",  async (req, res) => {
+router.put("/vote/:id", [checkEndDate, checkInitDate], async (req, res) => {
   try {
     const candidate = await Candidate.findById(req.params.id);
     candidate.vote += 1;

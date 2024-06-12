@@ -15,7 +15,6 @@ function validateVoterList(voterList) {
   const schema = joi.object({
     electionId: joi.string().required(),
     kimlikNo: joi.string().required(),
-    isVoted: joi.Boolean().required(),
   });
   return schema.validate(voterList);
 }

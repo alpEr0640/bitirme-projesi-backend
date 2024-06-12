@@ -93,11 +93,18 @@ router.post("/auth", async (req, res) => {
   else {
   }
 
-  /* const token = register.createAuthToken();
-*/
-  res.json({
-    token: register.createAuthToken()
-  })
+    const token = register.createAuthToken();
+   
+   res.json({
+     token: token,
+     isAdmin: register.isAdmin,
+   });
+
 });
+
+router.delete("/all", async (req, res) => {
+  const result = await Register.deleteMany();
+  res.send("başarılır");
+})
 
 module.exports = router;

@@ -1,22 +1,11 @@
 [
   {
-    "kimlikNo": 12345678901,
-    "isVoted": false
+    "kimlikNo": 12345678911
   },
   {
-    "kimlikNo": 12345678903,
-    "isVoted": false
+    "kimlikNo":12345678903
   },
   {
-    "kimlikNo": 12345678905,
-    "isVoted": false
-  },
-  {
-    "kimlikNo": 12345678907,
-    "isVoted": false
-  },
-  {
-    "kimlikNo":99988877724,
-    "isVoted": false
+    "kimlikNo":12345678903
   }
-] 
+]

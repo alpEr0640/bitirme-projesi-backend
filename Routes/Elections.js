@@ -49,7 +49,7 @@ router.post("/", async (req, res) => {
     electionExplanation: req.body.electionExplanation,
     electionType: req.body.electionType,
     candidates: req.body.candidates,
-    voter: req.body.voter,
+    //voter: req.body.voter,
     winCondition: req.body.winCondition
   });
   try {
@@ -62,12 +62,7 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const election = await Elc.findById({ _id: req.params.id });
-  (election.initDate = req.body.initDate),
-    ( election.endDate = req.body.endDate),
-    (election.electionTitle = req.body.electionTitle),
-    (election.electionExplanation = req.body.electionExplanation),
-    (election.electionType = req.body.electionType),
-    (election.candidates = req.body.candidates);
+  (election.voter = req.body.voter)
   const updatedElection = await election.save();
   res.send(updatedElection);
 });
@@ -76,5 +71,10 @@ router.delete("/:id", async (req, res) => {
   const result = await Elc.deleteOne({ _id: req.params.id });
   res.send(result);
 });
+
+
+
+
+
 
 module.exports = router;

@@ -9,15 +9,16 @@ const candidateSchema = mongoose.Schema({
     type: Number,
     default: "0"
   },
-  aboutCandidate: String
+  aboutCandidate: String,
+  candidateColor: String
 
 });
-
-
 
 function validateCandidate(candidate) {
     const schema = new joi.object({
       candidateId: joi.string().required(),
+      aboutCandidate: joi.string(),
+      candidateColor: joi.string().required()
     });
   return schema.validate(candidate);
 }

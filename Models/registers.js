@@ -42,6 +42,7 @@ registerSchema.methods.createAuthToken = function () {
       _id: this._id,
       _kimlikNo: this.kimlikNo,
       _password: this.password,
+      _isAdmin: this.isAdmin
       
     },
     "jwtPrivateKey"

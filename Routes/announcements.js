@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const { ancmt, validateAnnouncement } = require("../Models/Announcements");
 const isAdmin = require("../middleware/isAdmin");
+const auth = require("../middleware/auth");
 
 
 router.get("/", async (req, res) => {
@@ -37,7 +38,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
     const announcement = await ancmt.findById({ _id: req.params.id });
     announcement.announcentTitle = req.body.announcentTitle,
-        announcement.announcementBody = req.body.announcementBody
+    announcement.announcementBody = req.body.announcementBody
     const updatedAnnouncement = await announcement.save();
     res.send(updatedAnnouncement);
 });

@@ -9,7 +9,6 @@ function validateElectionType(ElectionType) {
     
     const schmea = new joi.object({
         electionType: joi.string().required(),
-        asd: joi.string().required(),
     });
     return schmea.validate(ElectionType);
 }

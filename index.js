@@ -11,6 +11,8 @@ const signup = require("./Routes/signup");
 const directory = require("./Routes/directory");
 const voterList = require("./Routes/voterList");
 const announcement = require("./Routes/announcements");
+const specialElection = require("./Routes/specialElection");
+const specialElectionType = require("./Routes/specialElectionType");
 const { required } = require("joi");
 app.use(express.json());
 app.use(
@@ -28,6 +30,8 @@ app.use("/api/signup", signup);
 app.use("/api/voterlist", voterList);
 app.use("/api/directory", directory);
 app.use("/api/announcement", announcement);
+app.use("/api/specialelection", specialElection);
+app.use("/api/specialelectiontype", specialElectionType)
 
 const link =
   "mongodb+srv://alpersonat:alper12389@bitirmeprojesi.i9vz8sb.mongodb.net/?retryWrites=true&w=majority";
