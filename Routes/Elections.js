@@ -49,7 +49,6 @@ router.post("/", async (req, res) => {
     electionExplanation: req.body.electionExplanation,
     electionType: req.body.electionType,
     candidates: req.body.candidates,
-    //voter: req.body.voter,
     winCondition: req.body.winCondition
   });
   try {

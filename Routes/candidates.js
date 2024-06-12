@@ -54,7 +54,7 @@ router.put("/:id", async (req, res) => {
   const updatedCandidate = await candidate.save();
   res.send(updatedCandidate);
 });
-router.put("/vote/:id", [checkEndDate, checkInitDate], async (req, res) => {
+router.put("/vote/:id",  async (req, res) => {
   try {
     const candidate = await Candidate.findById(req.params.id);
     candidate.vote += 1;
@@ -64,7 +64,7 @@ router.put("/vote/:id", [checkEndDate, checkInitDate], async (req, res) => {
     console.error("Hata:", error);
     res.status(500).send("Sunucu hatası");
   }
-})
+});
 
 router.delete("/:id", async (req, res) => {
   const result = await Candidate.deleteOne({ _id: req.params.id });

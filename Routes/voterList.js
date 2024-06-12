@@ -29,8 +29,19 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:kimlikNo", async (req, res) => {
-  const voter = await vtr.findOne({ kimlikNo: req.params.kimlikNo });
+router.get("/kimlikNo/electionId", async (req, res) => {
+  const voter = await vtr.findOne({
+    kimlikNo: req.params.kimlikNo,
+    electionId: req.params.electionId,
+  });
+  res
+});
+
+router.put("/:kimlikNo/:electionId", async (req, res) => {
+  const voter = await vtr.findOne({
+    kimlikNo: req.params.kimlikNo ,
+    electionId: req.params.electionId
+  });
   voter.isVoted = true;
   const updatedVoter = await voter.save();
 res.send(updatedVoter);
